@@ -23,12 +23,8 @@ if [[ "$threshold" =~ ^[0-9]+$ ]];then
 	# Double-check that the home directory exists with that name (it should)
 	if [ -d "$homeDirectory" ]; then
 	
-		# Get the creation time of the home directory
-		homeCreationDate=$(/usr/bin/GetFileInfo -d "$homeDirectory")
-		echo -e "Home was created $homeCreationDate\n"
-
 		# Get it into a UNIX timestamp
-		homeCreationTimestamp=$(/bin/date -j -f "%m/%d/%Y %T" "$homeCreationDate" +%s)
+		homeCreationTimestamp=$(/usr/bin/stat -f%B "$homeDirectory")
 		echo -e "Home was created $homeCreationTimestamp\n"
 	
 		# Get today's date from [threshold] mintues ago into a UNIX timestamp
