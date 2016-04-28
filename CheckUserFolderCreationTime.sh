@@ -2,7 +2,7 @@
 
 ##################################################
 ##################################################
-## Define threshold in minutes (must be an integer)
+## Define threshold in minutes (must be an integer--recommended less than 700 minutes)
 threshold=2
 
 ##################################################
@@ -16,31 +16,37 @@ if [[ "$threshold" =~ ^[0-9]+$ ]];then
 	currentUser=$(/bin/ls -l /dev/console | /usr/bin/awk '/ / { print $3 }')
 	echo -e "Current user is $currentUser\n"
 
-	# Get the creation date of the current user's home directory
-	homeDirectory="/Users/$currentUser"
-	echo -e "Home directory is $homeDirectory\n"
+   # Get path of the user's Dock
+   # By default (unless the sys admin has modified the User Template, in which case, why even have a login-once script?)
+   # there is no com.apple.dock.plist, so we're checking to see if it doesn't exist (good) or if it's been created only within
+   # the threshold period (also good)
+   currentUserDock="/Users/$currentUser/Library/Preferences/com.apple.dock.plist"
+   
+   if [ -f "$currentUserDock" ]; then
 
-	# Double-check that the home directory exists with that name (it should)
-	if [ -d "$homeDirectory" ]; then
+      echo -e "User Dock exists\n"
+
+   	# Get the creation date (in UNIX timestamp) of the current user dock
+		dockCreationTimestamp=$(/usr/bin/stat -f%B "$currentUserDock")
+		echo -e "Dock was created $dockCreationTimestamp\n"
 	
-		# Get it into a UNIX timestamp
-		homeCreationTimestamp=$(/usr/bin/stat -f%B "$homeDirectory")
-		echo -e "Home was created $homeCreationTimestamp\n"
-	
-		# Get today's date from [threshold] mintues ago into a UNIX timestamp
+		# Get today's date from [threshold] minutes ago into a UNIX timestamp
 		thresholdTimestamp=$(/bin/date -j -v -"$threshold"M +%s)
 		echo -e "$threshold minutes ago is $thresholdTimestamp\n"
 		
-		# Check to see if the folder was created in the last ten minutes
-		if [ "$homeCreationTimestamp" -gt "$thresholdTimestamp" ]; then
-			echo -e "This directory was just created in the last $threshold minutes\n"
+		# Check to see if the folder was created in the last [threshold] minutes
+		if [ "$dockCreationTimestamp" -gt "$thresholdTimestamp" ]; then
+			echo -e "The user Dock was created within the last $threshold minutes\n"
 
 		else
-			echo -e "This directory was created more than $threshold minutes ago\n"
+			echo -e "The user Dock was created more than $threshold minutes ago\n"
 
 		fi
 
-	# End checking the home directory exists	
+   else
+      echo -e "There is no user Dock (which means the user just logged in and this script somehow ran before the Dock could be created)\n"
+
+	# End checking the user dock exists	
 	fi
 
 else
