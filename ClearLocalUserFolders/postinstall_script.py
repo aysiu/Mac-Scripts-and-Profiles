@@ -19,7 +19,7 @@ def main():
          if userDir not in protectedUsers:
             # In theory shutil.rmtree should be able to recursively delete directories. There seems to be conflicting information on that. To be safe (or dangerous--depending on how you look at it), I'm going with the old standby of sudo rm -rf
             #print "Will delete %s" % userDirFull
-            #cmd = "sudo rm -rf %s" % userDirFull
+            cmd = "sudo rm -rf %s" % userDirFull
             #print cmd
             subprocess.call(cmd, shell=True)
 
