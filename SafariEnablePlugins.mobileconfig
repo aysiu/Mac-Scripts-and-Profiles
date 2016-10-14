@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadContent</key>
+			<dict>
+				<key>com.apple.Safari</key>
+				<dict>
+					<key>Set-Once</key>
+					<array>
+						<dict>
+							<key>mcx_data_timestamp</key>
+							<date>2016-10-14T16:15:13Z</date>
+							<key>mcx_preference_settings</key>
+							<dict>
+								<key>ManagedPlugInPolicies</key>
+								<dict>
+									<key>com.macromedia.Flash Player.plugin</key>
+									<dict>
+										<key>PlugInDisallowPromptBeforeUseDialog</key>
+										<true/>
+										<key>PlugInFirstVisitPolicy</key>
+										<string>PlugInPolicyAsk</string>
+									</dict>
+									<key>com.microsoft.SilverlightPlugin</key>
+									<dict>
+										<key>PlugInDisallowPromptBeforeUseDialog</key>
+										<true/>
+										<key>PlugInFirstVisitPolicy</key>
+										<string>PlugInPolicyAsk</string>
+									</dict>
+									<key>com.oracle.java.JavaAppletPlugin</key>
+									<dict>
+										<key>PlugInDisallowPromptBeforeUseDialog</key>
+										<true/>
+										<key>PlugInFirstVisitPolicy</key>
+										<string>PlugInPolicyAsk</string>
+									</dict>
+								</dict>
+								<key>PlugInInfo</key>
+								<dict>
+									<key>com.macromedia.Flash Player.plugin</key>
+									<dict>
+										<key>plugInCurrentState</key>
+										<true/>
+									</dict>
+									<key>com.microsoft.SilverlightPlugin</key>
+									<dict>
+										<key>plugInCurrentState</key>
+										<true/>
+									</dict>
+									<key>com.oracle.java.JavaAppletPlugin</key>
+									<dict>
+										<key>plugInCurrentState</key>
+										<true/>
+									</dict>
+								</dict>
+							</dict>
+						</dict>
+					</array>
+				</dict>
+			</dict>
+			<key>PayloadEnabled</key>
+			<true/>
+			<key>PayloadIdentifier</key>
+			<string>MCXToProfile.a307c7ad-4bc0-482b-8bee-f3199bcecf00.alacarte.customsettings.828ec6eb-b10a-4372-a337-6912bbff1555</string>
+			<key>PayloadType</key>
+			<string>com.apple.ManagedClient.preferences</string>
+			<key>PayloadUUID</key>
+			<string>828ec6eb-b10a-4372-a337-6912bbff1555</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Enables Flash, Java, and Silverlight plugins in Safari</string>
+	<key>PayloadDisplayName</key>
+	<string>Safari Plugins Enabled</string>
+	<key>PayloadIdentifier</key>
+	<string>SafariPrefs</string>
+	<key>PayloadOrganization</key>
+	<string>NAMEOFYOURORGANIZATION</string>
+	<key>PayloadRemovalDisallowed</key>
+	<true/>
+	<key>PayloadScope</key>
+	<string>System</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>a307c7ad-4bc0-482b-8bee-f3199bcecf00</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
