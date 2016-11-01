@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadContent</key>
+			<dict>
+				<key>com.apple.menuextra.battery</key>
+				<dict>
+					<key>Forced</key>
+					<array>
+						<dict>
+							<key>mcx_preference_settings</key>
+							<dict>
+								<key>ShowPercent</key>
+								<string>YES</string>
+							</dict>
+						</dict>
+					</array>
+				</dict>
+			</dict>
+			<key>PayloadEnabled</key>
+			<true/>
+			<key>PayloadIdentifier</key>
+			<string>MCXToProfile.198dfeae-b81e-454e-a4e3-02e0d3844b26.alacarte.customsettings.afd02558-3a31-4b57-bb83-3a69620ceb77</string>
+			<key>PayloadType</key>
+			<string>com.apple.ManagedClient.preferences</string>
+			<key>PayloadUUID</key>
+			<string>afd02558-3a31-4b57-bb83-3a69620ceb77</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Shows the battery percentage in the toolbar
+</string>
+	<key>PayloadDisplayName</key>
+	<string>ShowBatteryPercent</string>
+	<key>PayloadIdentifier</key>
+	<string>ShowBatteryPercent</string>
+	<key>PayloadOrganization</key>
+	<string>NAMEOFYOURORGANIZATION</string>
+	<key>PayloadRemovalDisallowed</key>
+	<true/>
+	<key>PayloadScope</key>
+	<string>System</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>198dfeae-b81e-454e-a4e3-02e0d3844b26</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
