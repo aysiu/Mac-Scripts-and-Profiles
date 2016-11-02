@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadContent</key>
+			<dict>
+				<key>com.barebones.textwrangler</key>
+				<dict>
+					<key>Forced</key>
+					<array>
+						<dict>
+							<key>mcx_preference_settings</key>
+							<dict>
+								<key>LastUpgradeAlertDate</key>
+								<date>2030-11-02T08:31:15Z</date>
+							</dict>
+						</dict>
+					</array>
+				</dict>
+			</dict>
+			<key>PayloadEnabled</key>
+			<true/>
+			<key>PayloadIdentifier</key>
+			<string>MCXToProfile.5cedf15f-4efc-4fb1-b90a-38d26be93e84.alacarte.customsettings.31a35b0d-8f9a-4367-92ab-59b4fb979d71</string>
+			<key>PayloadType</key>
+			<string>com.apple.ManagedClient.preferences</string>
+			<key>PayloadUUID</key>
+			<string>31a35b0d-8f9a-4367-92ab-59b4fb979d71</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Prevents TextWrangler from constantly prompting to upgrade to BBEdit</string>
+	<key>PayloadDisplayName</key>
+	<string>TextWrangler Suppress Upgrade Prompt</string>
+	<key>PayloadIdentifier</key>
+	<string>TextWranglerSuppressUpgradePrompt</string>
+	<key>PayloadOrganization</key>
+	<string>NAMEOFYOURORGANIZATION/string>
+	<key>PayloadRemovalDisallowed</key>
+	<true/>
+	<key>PayloadScope</key>
+	<string>System</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>5cedf15f-4efc-4fb1-b90a-38d26be93e84</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
