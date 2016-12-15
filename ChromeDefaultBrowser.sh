@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# First version notes:
-# This doesn't work if the com.apple.launchservices.secure.plist hasn't already been created.
-# May do a later version that creates the file if it doesn't exist.
-# Also, the change doesn't seem to take effect until you log out and log back in again.
-# Not sure if there's a way to force the changes to be recognized otherwise. Could be a command.
-
 # Desired default browser string
 DefaultBrowser='com.google.chrome'
+
+# PlistBuddy executable
+PlistBuddy='/usr/libexec/PlistBuddy'
+
+# Plist Location
+PlistLocation="$HOME/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist"
 
 ## Things to change
 #### LSHandlerContentType = public.url
@@ -19,33 +19,50 @@ DefaultBrowser='com.google.chrome'
 #### LSHandlerURLScheme = http
 #### LSHandlerRoleAll = com.apple.safari
 
-# Initialize counter that will just keep moving us through the array of dicts
-Counter=0
+# Double-check the PlistLocation exists
+if [ -f "$PlistLocation" ]; then
 
-# Initialize test variable
-PrefsChanged=0
+   # Initialize counter that will just keep moving us through the array of dicts
+   Counter=0
 
-while [ "$PrefsChanged" -lt 4 ]; do
-   DictResult=$(/usr/libexec/PlistBuddy -c "Print LSHandlers:$Counter" ~/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist)
+   # Initialize test variable
+   PrefsChanged=0
 
-   if [[ "$DictResult" == *"public.url"* ]]; then
-      echo "Changing public.url. Counter is $Counter"
+   while [ "$PrefsChanged" -lt 4 ]; do
+      DictResult=$("$PlistBuddy" -c "Print LSHandlers:$Counter" "$PlistLocation")
+
+      if [[ "$DictResult" == *"public.url"* ]]; then
+         echo "Changing public.url. Counter is $Counter"
    
-      /usr/libexec/PlistBuddy -c "Set :LSHandlers:$Counter:LSHandlerRoleViewer $DefaultBrowser" ~/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist
+         "$PlistBuddy" -c "Set :LSHandlers:$Counter:LSHandlerRoleViewer $DefaultBrowser" "$PlistLocation"
    
-      PrefsChanged=$((PrefsChanged+1))
+         PrefsChanged=$((PrefsChanged+1))
    
-   elif [[ "$DictResult" == *"public.html"* ]] || [[ "$DictResult" == *"https"* ]] || [[ "$DictResult" == *"http"* ]]; then
+      elif [[ "$DictResult" == *"public.html"* ]] || [[ "$DictResult" == *"https"* ]] || [[ "$DictResult" == *"http"* ]]; then
 
-      echo "Changing public.html or https or http. Counter is $Counter"
+         echo "Changing public.html or https or http. Counter is $Counter"
    
-      /usr/libexec/PlistBuddy -c "Set :LSHandlers:$Counter:LSHandlerRoleAll $DefaultBrowser" ~/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist
+         "$PlistBuddy" -c "Set :LSHandlers:$Counter:LSHandlerRoleAll $DefaultBrowser" "$PlistLocation"
 
-      PrefsChanged=$((PrefsChanged+1))
+         PrefsChanged=$((PrefsChanged+1))
    
-   fi
+      fi
 
-   # Increase counter
-  Counter=$((Counter+1))
+      # Increase counter
+     Counter=$((Counter+1))
 
-done
+      # Put in a safe guard just in case, for some reason, there aren't all the dicts we're looking for
+      if [ "$Counter" -eq 50 ]; then
+         # Set the PrefsChanged to 4, even though not all 4 got changed. We just don't want an infinite loop
+         PrefsChanged=4
+      fi
+
+   done
+
+# Plist does not exist
+else
+   # In the future, this will actually create the .plist instead of just saying it doesn't exist
+   echo "Plist does not exist"
+
+# End checking whether Plist exists or not
+fi
