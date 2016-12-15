@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Caveat: Scripts changes don't take effect until after user has logged out and logged back in again. Limited value.
+
 # Desired default browser string
 DefaultBrowser='com.google.chrome'
 
@@ -61,7 +63,7 @@ if [ -f "$PlistLocation" ]; then
 
 # Plist does not exist
 else
-   # In the future, this will actually create the .plist instead of just saying it doesn't exist
+   # Say the Plist does not exist
    echo "Plist does not exist"
 
 # End checking whether Plist exists or not
