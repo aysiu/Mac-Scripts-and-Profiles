@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# Caveat: Scripts changes don't take effect until after user has logged out and logged back in again. Limited value.
+# Caveat: Works only once this way to change defaults... won't work again until after you change it through the GUI
 
 # Desired default browser string
 DefaultBrowser='com.google.chrome'
+#DefaultBrowser='com.apple.safari'
+#DefaultBrowser='org.mozilla.firefox'
 
 # PlistBuddy executable
 PlistBuddy='/usr/libexec/PlistBuddy'
@@ -13,7 +15,7 @@ PlistLocation="$HOME/Library/Preferences/com.apple.LaunchServices/com.apple.laun
 
 ## Things to change
 #### LSHandlerContentType = public.url
-#### LSHandlerRoleViewer = com.google.chrome
+#### LSHandlerRoleViewer = com.apple.safari
 #### LSHandlerContentType = public.html
 #### LSHandlerRoleAll = com.apple.safari
 #### LSHandlerURLScheme = https
@@ -25,6 +27,7 @@ PlistLocation="$HOME/Library/Preferences/com.apple.LaunchServices/com.apple.laun
 if [ -f "$PlistLocation" ]; then
 
    # Initialize counter that will just keep moving us through the array of dicts
+   # A bit imprecise... would be better if we could just count the array of dicts
    Counter=0
 
    # Initialize test variable
@@ -60,6 +63,10 @@ if [ -f "$PlistLocation" ]; then
       fi
 
    done
+
+   echo "Rebuilding Launch services. This may take a few moments."
+   # Rebuilding launch services
+   /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
 
 # Plist does not exist
 else
