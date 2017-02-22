@@ -35,6 +35,11 @@ if [ -f "$PlistLocation" ]; then
 
    while [ "$PrefsChanged" -lt 4 ]; do
       DictResult=$("$PlistBuddy" -c "Print LSHandlers:$Counter" "$PlistLocation")
+      
+      # The counter has gone too high, so just stop the while loop
+      if [[ -z "$DictResult" ]]; then
+         PrefsChanged=4
+      fi
 
       if [[ "$DictResult" == *"public.url"* ]]; then
          echo "Changing public.url. Counter is $Counter"
@@ -55,12 +60,6 @@ if [ -f "$PlistLocation" ]; then
 
       # Increase counter
      Counter=$((Counter+1))
-
-      # Put in a safe guard just in case, for some reason, there aren't all the dicts we're looking for
-      if [ "$Counter" -eq 50 ]; then
-         # Set the PrefsChanged to 4, even though not all 4 got changed. We just don't want an infinite loop
-         PrefsChanged=4
-      fi
 
    done
 
