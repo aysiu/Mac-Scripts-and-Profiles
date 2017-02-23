@@ -65,7 +65,7 @@ if [ -f "$PlistLocation" ]; then
 
    echo "Rebuilding Launch services. This may take a few moments."
    # Rebuilding launch services
-   /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+   /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain system -domain user
 
 # Plist does not exist
 else
