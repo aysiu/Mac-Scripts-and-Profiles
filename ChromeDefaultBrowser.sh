@@ -39,9 +39,8 @@ if [ -f "$PlistLocation" ]; then
       # The counter has gone too high, so just stop the while loop
       if [[ -z "$DictResult" ]]; then
          PrefsChanged=4
-      fi
 
-      if [[ "$DictResult" == *"public.url"* ]]; then
+      elif [[ "$DictResult" == *"public.url"* ]]; then
          echo "Changing public.url. Counter is $Counter"
    
          "$PlistBuddy" -c "Set :LSHandlers:$Counter:LSHandlerRoleViewer $DefaultBrowser" "$PlistLocation"
