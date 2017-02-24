@@ -8,8 +8,14 @@ DefaultBrowser='com.google.chrome'
 # PlistBuddy executable
 PlistBuddy='/usr/libexec/PlistBuddy'
 
+# Plist directory
+PlistDirectory="$HOME/Library/Preferences/com.apple.LaunchServices"
+
+# Plist name
+PlistName="com.apple.launchservices.secure.plist"
+
 # Plist location
-PlistLocation="$HOME/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist"
+PlistLocation="$PlistDirectory/$PlistName"
 
 # Array of preferences to add
 PrefsToAdd=("{ LSHandlerContentType = \"public.url\"; LSHandlerPreferredVersions = { LSHandlerRoleViewer = \"-\"; }; LSHandlerRoleViewer = \"$DefaultBrowser\"; }"
@@ -49,26 +55,27 @@ if [ -f "$PlistLocation" ]; then
 	# End of while loop
 	done
 
-   echo "Adding in prefs"
-   for PrefToAdd in "${PrefsToAdd[@]}"
-   	do
-   		 defaults write "$PlistLocation" LSHandlers -array-add "$PrefToAdd"
-   	done
-
-	# Check the lsregister location exists
-	if [ -f "$lsregister" ]; then
-
-		echo "Rebuilding Launch services. This may take a few moments."
-		# Rebuilding launch services
-		"$lsregister" -kill -r -domain local -domain system -domain user
-	else
-		echo "You may need to log out or reboot for changes to take effect. Cannot find location of lsregister at $lsregister"
-	fi
-
 # Plist does not exist
 else
 	# Say the Plist does not exist
-	echo "Plist does not exist"
+	echo "Plist does not exist. Creating directory for it."
+	mkdir -p "$PlistDirectory"
 
 # End checking whether Plist exists or not
+fi
+
+echo "Adding in prefs"
+for PrefToAdd in "${PrefsToAdd[@]}"
+	do
+		defaults write "$PlistLocation" LSHandlers -array-add "$PrefToAdd"
+	done
+
+# Check the lsregister location exists
+if [ -f "$lsregister" ]; then
+
+	echo "Rebuilding Launch services. This may take a few moments."
+	# Rebuilding launch services
+	"$lsregister" -kill -r -domain local -domain system -domain user
+else
+	echo "You may need to log out or reboot for changes to take effect. Cannot find location of lsregister at $lsregister"
 fi
