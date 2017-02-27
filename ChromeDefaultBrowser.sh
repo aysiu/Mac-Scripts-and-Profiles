@@ -45,8 +45,8 @@ if [ -f "$PlistLocation" ]; then
 		# Check for existing settings
 		if [[ "$DictResult" == *"public.url"* ]] || [[ "$DictResult" == *"public.html"* ]] || [[ "$DictResult" == *"LSHandlerURLScheme = https"* ]] || [[ "$DictResult" == *"LSHandlerURLScheme = http"* ]]; then
 			# Delete the existing. We'll add new ones in later
-         "$PlistBuddy" -c "Delete :LSHandlers:$Counter" "$PlistLocation"
-         echo "Deleting $Counter from Plist"
+         	"$PlistBuddy" -c "Delete :LSHandlers:$Counter" "$PlistLocation"
+         	echo "Deleting $Counter from Plist"
 		fi
 
 		# Increase counter
