@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Wait a few seconds
+sleep 3
+
 # Check to see if MathType is installed. We don't want to make any changes if MathType is installed
 if [ ! -f "/Applications/MathType 6/MathType.app/Contents/Info.plist" ]; then
     
@@ -29,10 +32,10 @@ if [ ! -f "/Applications/MathType 6/MathType.app/Contents/Info.plist" ]; then
             no_spaces="${office_app/ /%20}"
 
             # See if the old version is in there
-            old_version=$(dockutil --list | grep -n "Microsoft%20Office%202011/$no_spaces.app")
+            old_version=$(/usr/local/bin/dockutil --list | grep -n "Microsoft%20Office%202011/$no_spaces.app")
     
             # See if the new version is in there
-            new_version=$(dockutil --list | grep -n "/Applications/$no_spaces.app")
+            new_version=$(/usr/local/bin/dockutil --list | grep -n "/Applications/$no_spaces.app")
 
             # If there is an old version but no new version...
             if [ ! -z "$old_version" ] && [ -z "$new_version" ]; then
@@ -54,7 +57,7 @@ if [ ! -f "/Applications/MathType 6/MathType.app/Contents/Info.plist" ]; then
 
     # If there were changes made, kill the Dock
     if [ "$changes_made" == 1 ]; then
-        killall Dock
+        /usr/bin/killall Dock
     # End checking changes have been made
     fi
     
