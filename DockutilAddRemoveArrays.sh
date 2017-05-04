@@ -27,7 +27,7 @@ for removalItem in "${itemsToRemove[@]}"
 
 for additionItem in "${itemsToAdd[@]}"
    do
-      # Check that the item is actually exists to be added to the Dock and that it isn't already in the Dock
+      # Check that the item actually exists to be added to the Dock and that it isn't already in the Dock
       # Stripping path and extension code based on code from http://stackoverflow.com/a/2664746
       additionItemString=${additionItem##*/}
       additionItemBasename=${additionItemString%.*}
