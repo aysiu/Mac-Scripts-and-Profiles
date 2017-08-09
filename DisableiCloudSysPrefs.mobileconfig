@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>PayloadIdentifier</key>
+		<string>com.apple.mdm.4e260db0-5f73-0135-3d33-0c4de9a3ce04.alacarte</string>
+		<key>PayloadRemovalDisallowed</key>
+		<false/>
+		<key>PayloadScope</key>
+		<string>System</string>
+		<key>PayloadType</key>
+		<string>Configuration</string>
+		<key>PayloadUUID</key>
+		<string>4e260db0-5f73-0135-3d33-0c4de9a3ce04</string>
+		<key>PayloadOrganization</key>
+		<string>NAMEOFYOURORGANIZATION</string>
+		<key>PayloadVersion</key>
+		<integer>1</integer>
+		<key>PayloadDisplayName</key>
+		<string>Disable iCloud System Preferences</string>
+		<key>PayloadContent</key>
+		<array>
+			<dict>
+				<key>PayloadType</key>
+				<string>com.apple.systempreferences</string>
+				<key>PayloadVersion</key>
+				<integer>1</integer>
+				<key>PayloadIdentifier</key>
+			<string>com.apple.mdm.4e260db0-5f73-0135-3d33-0c4de9a3ce04.alacarte.macosxrestrictions.6f8cae20-5f73-0135-3d34-0c4de9a3ce04.systempreferences</string>
+				<key>PayloadEnabled</key>
+				<true/>
+				<key>PayloadUUID</key>
+				<string>0814e8b2-da21-25c0-acc0-8a0c3caa70d0</string>
+				<key>PayloadDisplayName</key>
+				<string>System Preferences</string>
+				<key>DisabledPreferencePanes</key>
+				<array>
+					<string>com.apple.preferences.icloud</string>
+				</array>
+			</dict>
+		</array>
+	</dict>
+</plist>
