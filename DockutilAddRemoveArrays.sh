@@ -37,4 +37,4 @@ for additionItem in "${itemsToAdd[@]}"
       fi
    done
 
-killall Dock
+/usr/bin/killall Dock
