@@ -17,7 +17,7 @@
 								<key>ClientMode</key>
 								<integer>2</integer>
 								<key>WhitelistRegex</key>
-								<string>^(?:/Applications/Adobe Acrobat DC)/.*|^(?:/Applications/Adobe Photoshop CC 2015)/.*|^(?:/Applications/Adobe Photoshop CC 2017)/.*|^(?:/Applications/Calculator.app)/.*|^(?:/Applications/Bitdefender)/.*|^(?:/Applications/Endpoint Security for Mac.app)/.*|^(?:/Applications/iBooks.app)/.*|^(?:/Applications/iMovie.app)/.*|^(?:/Applications/iTunes.app)/.*|^(?:/Applications/Keynote.app)/.*|^(?:/Applications/LockDown Browser.app)/.*|^(?:/Applications/Manager.app)/.*|^(?:/Applications/Managed Software Center.app)/.*|^(?:/Applications/Microsoft Excel.app)/.*|^(?:/Applications/Microsoft PowerPoint.app)/.*|^(?:/Applications/Microsoft Word.app)/.*|^(?:/Applications/Notes.app)/.*|^(?:/Applications/Numbers.app)/.*|^(?:/Applications/Pages.app)/.*|^(?:/Applications/Preview.app)/.*|^(?:/Applications/QuickTime Player.app)/.*|^(?:/Applications/Stickies.app)/.*|^(?:/Library/Application Support/Symantec)/.*|^(?:/Applications/System Preferences.app)/.*|^(?:/Applications/TextEdit.app)/.*</string>
+								<string>^(?:/Applications/Adobe Acrobat DC)/.*|^(?:/Applications/Adobe Photoshop CC 2015)/.*|^(?:/Applications/Adobe Photoshop CC 2017)/.*|^(?:/Applications/Bitdefender)/.*|^(?:/Applications/Endpoint Security for Mac.app)/.*|^(?:/Applications/LockDown Browser.app)/.*|^(?:/Applications/Manager.app)/.*|^(?:/Applications/Managed Software Center.app)/.*|^(?:/Applications/Microsoft Excel.app)/.*|^(?:/Applications/Microsoft PowerPoint.app)/.*|^(?:/Applications/Microsoft Word.app)/.*|^(?:/Library/Application Support/Symantec)/.*</string>
 							</dict>
 						</dict>
 					</array>
