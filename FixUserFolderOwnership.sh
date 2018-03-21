@@ -5,16 +5,16 @@
 
 # Get list of active users
 # From https://www.jamf.com/jamf-nation/discussions/3736/dscl-command-to-list-local-users-but-exclude-system-accounts#responseChild17416
-USER_LIST=$(dscl /Local/Default -list /Users uid | awk '$2 >= 100 && $0 !~ /^_/ { print $1 }')
+USER_LIST=$(/usr/bin/dscl /Local/Default -list /Users uid | /usr/bin/awk '$2 >= 100 && $0 !~ /^_/ { print $1 }')
 
 # Loop through list of users
 for THIS_USER in $USER_LIST; do
 
    # Determine the user home directory
-   USER_HOME=$(dscl . -read "/Users/$THIS_USER" NFSHomeDirectory | awk '{print $2}')
+   USER_HOME=$(/usr/bin/dscl . -read "/Users/$THIS_USER" NFSHomeDirectory | /usr/bin/awk '{print $2}')
 
    # Change ownership back to the original owner
-   sudo chown -R "$THIS_USER" "$USER_HOME"
+   /usr/sbin/chown -R "$THIS_USER" "$USER_HOME"
 
 # End looping through list of users
 done
