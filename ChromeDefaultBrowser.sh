@@ -46,7 +46,7 @@ if [ -f "$PlistLocation" ]; then
 		if [[ "$DictResult" == *"public.url"* ]] || [[ "$DictResult" == *"public.html"* ]] || [[ "$DictResult" == *"LSHandlerURLScheme = https"* ]] || [[ "$DictResult" == *"LSHandlerURLScheme = http"* ]]; then
 			# Delete the existing. We'll add new ones in later
          	"$PlistBuddy" -c "Delete :LSHandlers:$Counter" "$PlistLocation"
-         	echo "Deleting $Counter from Plist"
+         	/bin/echo "Deleting $Counter from Plist"
 		fi
 
 		# Increase counter
@@ -58,8 +58,8 @@ if [ -f "$PlistLocation" ]; then
 # Plist does not exist
 else
 	# Say the Plist does not exist
-	echo "Plist does not exist. Creating directory for it."
-	mkdir -p "$PlistDirectory"
+	/bin/echo "Plist does not exist. Creating directory for it."
+	/bin/mkdir -p "$PlistDirectory"
 
 # End checking whether Plist exists or not
 fi
@@ -67,15 +67,15 @@ fi
 echo "Adding in prefs"
 for PrefToAdd in "${PrefsToAdd[@]}"
 	do
-		defaults write "$PlistLocation" LSHandlers -array-add "$PrefToAdd"
+		/usr/bin/defaults write "$PlistLocation" LSHandlers -array-add "$PrefToAdd"
 	done
 
 # Check the lsregister location exists
 if [ -f "$lsregister" ]; then
 
-	echo "Rebuilding Launch services. This may take a few moments."
+	/bin/echo "Rebuilding Launch services. This may take a few moments."
 	# Rebuilding launch services
 	"$lsregister" -kill -r -domain local -domain system -domain user
 else
-	echo "You may need to log out or reboot for changes to take effect. Cannot find location of lsregister at $lsregister"
+	/bin/echo "You may need to log out or reboot for changes to take effect. Cannot find location of lsregister at $lsregister"
 fi
