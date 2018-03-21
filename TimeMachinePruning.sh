@@ -16,7 +16,7 @@
 thresholdTimestamp=$(/bin/date -j -v -"$thresholdDays"d "+%s")
 
 # Change directories to Time Machine Backups
-cd "$backupLocation"
+/usr/bin/cd "$backupLocation"
 
 # Loop through the Time Machine Backup folders
 for f in *; do
@@ -33,8 +33,8 @@ for f in *; do
         # Compare it to the threshold timestamp    
         if [ "$thresholdTimestamp" -gt "$testTimestamp" ]; then
 
-            echo "Going to delete $backupLocation/$f"
-            sudo /usr/bin/tmutil delete "$backupLocation/$f"
+            /bin/echo "Going to delete $backupLocation/$f"
+            /usr/bin/tmutil delete "$backupLocation/$f"
 
         # End comparison of timestamps
         fi
