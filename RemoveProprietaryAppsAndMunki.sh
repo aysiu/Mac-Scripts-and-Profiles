@@ -21,9 +21,9 @@ LaunchDs=(
 
 for LaunchD in "${LaunchDs[@]}"; do
    if [ -f "$LaunchD" ]; then
-      sudo launchctl unload "$LaunchD"
-      sudo rm -f "$LaunchD"
-      echo -e "Removing $LaunchD\n"
+      /bin/launchctl unload "$LaunchD"
+      /bin/rm -f "$LaunchD"
+      /bin/echo -e "Removing $LaunchD\n"
    fi
 done
 
@@ -50,9 +50,9 @@ AppsToRemove=("/Applications/Adobe Acrobat DC"
 
 for AppToRemove in "${AppsToRemove[@]}"; do
    if [ -a "$AppToRemove" ]; then
-      #echo -e "Removing $AppToRemove\n"
-      sudo rm -rf "$AppToRemove"
-      echo -e "Removing $AppToRemove\n"
+      # /bin/echo -e "Removing $AppToRemove\n"
+      /bin/rm -rf "$AppToRemove"
+      /bin/echo -e "Removing $AppToRemove\n"
    fi
 done
 
@@ -138,31 +138,31 @@ RECEIPTTESTS=(
 
 # Remove receipts for proprietary applications
 for RECEIPTTEST in "${RECEIPTTESTS[@]}"; do
-   #echo -e "Processing $RECEIPTTEST\n"
+   # /bin/echo -e "Processing $RECEIPTTEST\n"
    RECEIPTWILD=$(pkgutil --pkgs="$RECEIPTTEST")
     if [ ! -z "$RECEIPTWILD" ]; then
     for ARECEIPT in $RECEIPTWILD; do
-        sudo pkgutil --forget "$ARECEIPT"
-         echo -e "Forgetting $ARECEIPT\n"
+        /usr/sbin/pkgutil --forget "$ARECEIPT"
+        /bin/echo -e "Forgetting $ARECEIPT\n"
     done
     fi
 done
 
 # Remove Munki (list from https://github.com/munki/munki/wiki/Removing-Munki)
-echo -e "Removing Munki\n"
-sudo launchctl unload /Library/LaunchDaemons/com.googlecode.munki.*
-sudo rm -rf "/Applications/Utilities/Managed Software Update.app"
-sudo rm -rf "/Applications/Managed Software Center.app"
-sudo rm -f /Library/LaunchDaemons/com.googlecode.munki.*
-sudo rm -f /Library/LaunchAgents/com.googlecode.munki.*
-sudo rm -rf "/Library/Managed Installs"
-sudo rm -f /Library/Preferences/ManagedInstalls.plist
-sudo rm -rf /usr/local/munki
-sudo rm /etc/paths.d/munki
-sudo pkgutil --forget com.googlecode.munki.admin
-sudo pkgutil --forget com.googlecode.munki.app
-sudo pkgutil --forget com.googlecode.munki.core
-sudo pkgutil --forget com.googlecode.munki.launchd
+/bin/echo -e "Removing Munki\n"
+/bin/launchctl unload /Library/LaunchDaemons/com.googlecode.munki.*
+/bin/rm -rf "/Applications/Utilities/Managed Software Update.app"
+/bin/rm -rf "/Applications/Managed Software Center.app"
+/bin/rm -f /Library/LaunchDaemons/com.googlecode.munki.*
+/bin/rm -f /Library/LaunchAgents/com.googlecode.munki.*
+/bin/rm -rf "/Library/Managed Installs"
+/bin/rm -f /Library/Preferences/ManagedInstalls.plist
+/bin/rm -rf /usr/local/munki
+/bin/rm /etc/paths.d/munki
+/usr/sbin/pkgutil --forget com.googlecode.munki.admin
+/usr/sbin/pkgutil --forget com.googlecode.munki.app
+/usr/sbin/pkgutil --forget com.googlecode.munki.core
+/usr/sbin/pkgutil --forget com.googlecode.munki.launchd
 
 
 CrashPlanUninstall="/Library/Application Support/CrashPlan/Uninstall.app/Contents/Resources/uninstall.sh"
@@ -170,7 +170,7 @@ CrashPlanUninstall="/Library/Application Support/CrashPlan/Uninstall.app/Content
 # See if CrashPlan uninstall exists... we could call it, but the uninstall doesn't change that often, so we're going to do a copy-and-paste instead
 if [ -f "$CrashPlanUninstall" ]; then
 
-   sudo /bin/bash "$CrashPlanUninstall"
+   /bin/bash "$CrashPlanUninstall"
 
 # End checking for CrashPlan
 fi
