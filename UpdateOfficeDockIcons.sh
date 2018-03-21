@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Wait a few seconds
-sleep 3
+/bin/sleep 3
 
 # Check to see if MathType is installed. We don't want to make any changes if MathType is installed
 if [ ! -f "/Applications/MathType 6/MathType.app/Contents/Info.plist" ]; then
@@ -32,16 +32,16 @@ if [ ! -f "/Applications/MathType 6/MathType.app/Contents/Info.plist" ]; then
             no_spaces="${office_app/ /%20}"
 
             # See if the old version is in there
-            old_version=$(/usr/local/bin/dockutil --list | grep -n "Microsoft%20Office%202011/$no_spaces.app")
+            old_version=$(/usr/local/bin/dockutil --list | /usr/bin/grep -n "Microsoft%20Office%202011/$no_spaces.app")
     
             # See if the new version is in there
-            new_version=$(/usr/local/bin/dockutil --list | grep -n "/Applications/$no_spaces.app")
+            new_version=$(/usr/local/bin/dockutil --list | /usr/bin/grep -n "/Applications/$no_spaces.app")
 
             # If there is an old version but no new version...
             if [ ! -z "$old_version" ] && [ -z "$new_version" ]; then
 
                 # Update the old version to the new one
-                echo "Replacing 2011 version of $office_app"
+                /bin/echo "Replacing 2011 version of $office_app"
                 /usr/local/bin/dockutil --add /Applications/"$office_app".app --replacing "$office_app" --no-restart
                 
                 # If the changes made is still 0, make it 1
