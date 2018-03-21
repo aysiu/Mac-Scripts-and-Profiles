@@ -10,7 +10,7 @@ offendingEntryOne = '"/System/Library/CoreServices/Menu Extras/TimeMachine.menu"
 offendingEntryTwo = '"/System/Library/CoreServices/Menu Extras/TimeMachine.menu"'
 
 # Get the current menus
-currentMenus = subprocess.check_output("defaults read com.apple.systemuiserver menuExtras", shell=True)
+currentMenus = subprocess.check_output("/usr/bin/defaults read com.apple.systemuiserver menuExtras", shell=True)
 
 # Print out the current menus
 print "The output of the command is %s" % (currentMenus)
@@ -40,4 +40,4 @@ elif currentMenus.find(offendingEntryTwo) != -1:
 #print "After taking out the offending entry, it looks like %s" % (currentMenus)
 
 # Let's write it back and then refresh the menu bar
-subprocess.call("defaults write com.apple.systemuiserver menuExtras -array " + currentMenus + " && killall -KILL SystemUIServer", shell=True)
+subprocess.call("/usr/bin/defaults write com.apple.systemuiserver menuExtras -array " + currentMenus + " && /usr/bin/killall -KILL SystemUIServer", shell=True)
