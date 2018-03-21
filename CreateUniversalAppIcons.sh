@@ -25,6 +25,6 @@ if [ -f "$originalImage" ]; then
 
 else
 
-   echo "$originalImage does not exist or isn't properly named. Make sure it is in the same folder as this script"
+   /bin/echo "$originalImage does not exist or isn't properly named. Make sure it is in the same folder as this script"
 
 fi
