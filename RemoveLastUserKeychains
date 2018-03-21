@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Get the last user
-lastUserName=$(defaults read /Library/Preferences/com.apple.loginwindow lastUserName)
+lastUserName=$(/usr/bin/defaults read /Library/Preferences/com.apple.loginwindow lastUserName)
 
 # Remove the keychains for that user
-sudo rm -rf /Users/"$lastUserName"/Library/Keychains/*
-sudo rm -rf /Users/"$lastUserName"/Library/Keychains/.f*
+/bin/rm -rf /Users/"$lastUserName"/Library/Keychains/*
+/bin/rm -rf /Users/"$lastUserName"/Library/Keychains/.f*
 
 # Add to log file
-sudo echo "$(date) - Keychain deleted for $lastUserName" >> /Library/Logs/RemoveKeychains.log
+/bin/echo "$(/bin/date) - Keychain deleted for $lastUserName" >> /Library/Logs/RemoveKeychains.log
