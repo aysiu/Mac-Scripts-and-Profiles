@@ -18,7 +18,7 @@ itemsToAdd=(
 for removalItem in "${itemsToRemove[@]}"
    do
       # Check that the item is actually in the Dock
-      inDock=$(/usr/local/bin/dockutil --list | grep "$removalItem")
+      inDock=$(/usr/local/bin/dockutil --list | /usr/bin/grep "$removalItem")
       if [ ! -z "$inDock" ]; then
          /usr/local/bin/dockutil --remove "$removalItem" --no-restart
       fi
@@ -31,7 +31,7 @@ for additionItem in "${itemsToAdd[@]}"
       # Stripping path and extension code based on code from http://stackoverflow.com/a/2664746
       additionItemString=${additionItem##*/}
       additionItemBasename=${additionItemString%.*}
-      inDock=$(/usr/local/bin/dockutil --list | grep "additionItemBasename")
+      inDock=$(/usr/local/bin/dockutil --list | /usr/bin/grep "additionItemBasename")
       if [ -e "$additionItem" ] && [ -z "$inDock" ]; then
             /usr/local/bin/dockutil --add "$additionItem" --no-restart
       fi
