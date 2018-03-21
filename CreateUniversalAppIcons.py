@@ -23,7 +23,7 @@ def main():
          copyfile(originalImage, newName)
       
          # Resize the new copy
-         cmd = 'sips -z ' + newSize + ' ' + newSize + ' ' + newName
+         cmd = '/usr/bin/sips -z ' + newSize + ' ' + newSize + ' ' + newName
          subprocess.call(cmd, shell=True)
    else:
       print "%s is not in the same folder as this script" % originalImage
