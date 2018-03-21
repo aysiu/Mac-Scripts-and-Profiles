@@ -10,10 +10,10 @@ appToCheck='/Applications/Automator.app/'
 ##### End user-defined input ######
 
 # Check the last date and time that the app was opened
-lastOpened=$(mdls "$appToCheck" | grep kMDItemLastUsedDate  | awk -F "= " '{print $2}')
+lastOpened=$(/usr/bin/mdls "$appToCheck" | /usr/bin/grep kMDItemLastUsedDate  | /usr/bin/awk -F "= " '{print $2}')
 
 # Convert that to a UNIX Timestamp / Epoch
-lastOpenedTimestamp=$(date -j -f '%Y-%m-%d %H:%M:%S +0000' "$lastOpened" +%s)
+lastOpenedTimestamp=$(/bin/date -j -f '%Y-%m-%d %H:%M:%S +0000' "$lastOpened" +%s)
 
 # Get the timestamp of the threshold
 thresholdTimestamp=$(/bin/date -j -v -"$threshold"H +%s)
@@ -22,14 +22,14 @@ thresholdTimestamp=$(/bin/date -j -v -"$threshold"H +%s)
 if [ "$lastOpenedTimestamp" -lt "$thresholdTimestamp" ]; then
    
    # If it hasn't been opened since before the threshold date, say so or do something
-   echo "$appToCheck hasn't been opened since $lastOpened"
+   /bin/echo "$appToCheck hasn't been opened since $lastOpened"
    
    # By default, this just echoes feedback, but you may want to perform an action... put the action here
 
 else
    
    # If it has been opened since the threshold date, say so or do something
-   echo "$appToCheck was recently opened at $lastOpened"
+   /bin/echo "$appToCheck was recently opened at $lastOpened"
    
    # By default, this just echoes feedback, but you may want to perform an action... put the action here
 
