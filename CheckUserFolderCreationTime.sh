@@ -14,7 +14,7 @@ if [[ "$threshold" =~ ^[0-9]+$ ]];then
 
    # Get the current user's home directory
    currentUser=$(/bin/ls -l /dev/console | /usr/bin/awk '/ / { print $3 }')
-   echo -e "Current user is $currentUser\n"
+   /bin/echo -e "Current user is $currentUser\n"
 
    # Get path of the user's Dock
    # By default (unless the sys admin has modified the User Template, in which case, why even have a login-once script?)
@@ -27,29 +27,29 @@ if [[ "$threshold" =~ ^[0-9]+$ ]];then
    
    if [ -f "$currentUserDock" ]; then
 
-      echo -e "User Dock exists\n"
+      /bin/echo -e "User Dock exists\n"
 
       # Get the creation date (in UNIX timestamp) of the current user dock
       dockCreationTimestamp=$(/usr/bin/stat -f%B "$currentUserDock")
-      echo -e "Dock was created $dockCreationTimestamp\n"
+      /bin/echo -e "Dock was created $dockCreationTimestamp\n"
    
       # Get today's date from [threshold] minutes ago into a UNIX timestamp
       thresholdTimestamp=$(/bin/date -j -v -"$threshold"M +%s)
-      echo -e "$threshold minutes ago is $thresholdTimestamp\n"
+      /bin/echo -e "$threshold minutes ago is $thresholdTimestamp\n"
       
       # Check to see if the folder was created in the last [threshold] minutes
       if [ "$dockCreationTimestamp" -gt "$thresholdTimestamp" ]; then
          recentlyCreated=1
-         echo -e "The user Dock was created within the last $threshold minutes\n"
+         /bin/echo -e "The user Dock was created within the last $threshold minutes\n"
 
       else
-         echo -e "The user Dock was created more than $threshold minutes ago\n"
+         /bin/echo -e "The user Dock was created more than $threshold minutes ago\n"
 
       fi
 
    else
       recentlyCreated=1
-      echo -e "There is no user Dock (which means the user just logged in and this script somehow ran before the Dock could be created)\n"
+      /bin/echo -e "There is no user Dock (which means the user just logged in and this script somehow ran before the Dock could be created)\n"
 
    # End checking the user dock exists   
    fi
@@ -57,11 +57,11 @@ if [[ "$threshold" =~ ^[0-9]+$ ]];then
    if [ "$recentlyCreated" == 1 ]; then
    
       # This is where your code would go
-      echo -e "The use Dock is either non-existent or only recently created, so you can probably run your script.\n"
+      /bin/echo -e "The use Dock is either non-existent or only recently created, so you can probably run your script.\n"
    fi
 
 else
-   echo -e "\nThe threshold is not an integer\n"
+   /bin/echo -e "\nThe threshold is not an integer\n"
 
 # End checking whether the threshold is an integer or not
 fi
