@@ -24,10 +24,10 @@ def main():
             # See what the verified trust info looks like
             p = subprocess.Popen(["autopkg", "verify-trust-info", "-vv", recipe],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
             verify_result,output_error = p.communicate()
-            if output_error!='':
-                print output_error
-            elif desired_result not in verify_result:
+            if desired_result in verify_result:
                 print verify_result
+            else:
+                print output_error
                 confirmation=raw_input("Do you trust these changes? (y/n) ")
                 if confirmation.lower().strip() in affirmative_responses:
                     print "Updating trust info for %s" % recipe
