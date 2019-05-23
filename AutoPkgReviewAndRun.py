@@ -3,8 +3,8 @@
 import os
 import subprocess
 
-# Where is the recipe list (one recipe per line) located?
-recipe_list='/Users/admin/Library/Application Support/AutoPkgr/recipe_list.txt'
+# Where is the recipe list (one recipe per line) located? Below is just an example. Modify as needed.
+recipe_list='/Users/USERNAME/Library/Application Support/AutoPkgr/recipe_list.txt'
 
 # Acceptable affirmative responses
 affirmative_responses=["y", "yes", "sure", "definitely"]
