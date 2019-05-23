@@ -20,24 +20,31 @@ def main():
         # Loop through the recipes and see which ones need to be verified
         for recipe in recipes:
             print "Verifying trust info for %s" % recipe
+            desired_result=recipe + ": OK"
             # See what the verified trust info looks like
-            try:
-                verify_result=subprocess.check_output(["autopkg", "verify-trust-info", "-vv", recipe], stderr=subprocess.STDOUT)
-            except:
-                verify_result="Verification failure"
-            if verify_result=="Verification failure":
-                print "Unable to verify %s" % recipe
-            else:
-                desired_result=recipe + ": OK"
+            p = subprocess.Popen(["autopkg", "verify-trust-info", "-vv", recipe],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            verify_result,output_error = p.communicate()
+
+            # Initialize a test variable. If this stays blank, we know the recipe trust info is fine
+            display_text=''
+
+            # In AutoPkg 1.0, the output error is blank, and the verify_result has the output
+            if output_error=='':
                 if desired_result not in verify_result:
-                    confirmation=raw_input("Do you trust these changes? (y/n) ")
-                    if confirmation.lower().strip() in affirmative_responses:
-                        print "Updating trust info for %s" % recipe
-                        subprocess.call(["autopkg", "update-trust-info", recipe])
-                    else:
-                        print "Okay. Not updating trust for %s" % recipe
-                        # Remove it from the list of recipes to run... no point in running it if the trust info isn't good
-                        recipes.remove(recipe)
+                    display_text=verify_result
+            # In AutoPkg 1.1, the output error has the output, whether there's an error or not
+            elif desired_result not in output_error:
+                display_text=output_error
+            if display_text!='':
+                print display_text
+                confirmation=raw_input("Do you trust these changes? (y/n) ")
+                if confirmation.lower().strip() in affirmative_responses:
+                    print "Updating trust info for %s" % recipe
+                    subprocess.call(["autopkg", "update-trust-info", recipe])
+                else:
+                    print "Okay. Not updating trust for %s" % recipe
+                    # Remove it from the list of recipes to run... no point in running it if the trust info isn't good
+                    recipes.remove(recipe)
         # Whether there were things to verify or not, go ahead and run the recipes
         cmd = [ "autopkg", "run" ]
         cmd.extend(recipes)
