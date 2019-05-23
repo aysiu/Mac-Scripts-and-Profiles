@@ -24,19 +24,10 @@ def main():
             # See what the verified trust info looks like
             p = subprocess.Popen(["autopkg", "verify-trust-info", "-vv", recipe],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
             verify_result,output_error = p.communicate()
-
-            # Initialize a test variable. If this stays blank, we know the recipe trust info is fine
-            display_text=''
-
-            # In AutoPkg 1.0, the output error is blank, and the verify_result has the output
-            if output_error=='':
-                if desired_result not in verify_result:
-                    display_text=verify_result
-            # In AutoPkg 1.1, the output error has the output, whether there's an error or not
-            elif desired_result not in output_error:
-                display_text=output_error
-            if display_text!='':
-                print display_text
+            if output_error!='':
+                print output_error
+            elif desired_result not in verify_result:
+                print verify_result
                 confirmation=raw_input("Do you trust these changes? (y/n) ")
                 if confirmation.lower().strip() in affirmative_responses:
                     print "Updating trust info for %s" % recipe
