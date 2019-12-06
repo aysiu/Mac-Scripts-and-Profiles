@@ -1,5 +1,8 @@
 #!/bin/bash
 
+## Note (6 Dec., 2019): This no longer seems to work in Catalina (10.15).
+## If you have any PRs to fix, I'm open to reviewing and merging.
+
 # Desired default browser string
 DefaultBrowser='com.google.chrome'
 #DefaultBrowser='com.apple.safari'
