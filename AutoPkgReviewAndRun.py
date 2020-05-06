@@ -7,7 +7,7 @@ import subprocess
 
 # Where is the recipe list (one recipe per line) located?
 # Recipe list should be one recipe per line, separated by a carriage return ("\n")
-recipe_list='/Users/a/Library/AutoPkg/recipe_list.txt'
+recipe_list=os.path.expanduser('~/Library/AutoPkg/recipe_list.txt')
 
 # Acceptable affirmative responses
 affirmative_responses=["y", "yes", "sure", "definitely"]
