@@ -1,4 +1,4 @@
-#!/Library/AutoPkg/Python3/Python.framework/Versions/3.7/bin/python3.7 
+#!/Library/AutoPkg/Python3/Python.framework/Versions/Current/bin/python3 
 
 ### This script updates AutoPkg repos, verifies trust info (with prompt to update after review), and runs recipes in a recipe list
 
@@ -34,8 +34,8 @@ def main():
                 verify_result = out
             desired_result = recipe + ": OK"
             if desired_result not in verify_result:
-                print(verify_result)
-                confirmation = raw_input("Do you trust these changes? (y/n) ")
+                print(err)
+                confirmation = input("Do you trust these changes? (y/n) ")
                 if confirmation.lower().strip() in affirmative_responses:
                     print("Updating trust info for {}".format(recipe))
                     cmd = [ "/usr/local/bin/autopkg", "update-trust-info", recipe ]
