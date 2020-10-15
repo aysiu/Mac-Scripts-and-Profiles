@@ -29,7 +29,7 @@ def get_options(recipe_list):
         recipe_verify = False
         recipe_run = True
     # If it's neither verify only or run only, do both
-    else
+    else:
         recipe_verify = True
         recipe_run = True
     # See if there's a recipe list specified
