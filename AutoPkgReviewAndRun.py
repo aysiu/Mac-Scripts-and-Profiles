@@ -22,22 +22,22 @@ def get_options(recipe_list):
     args = parser.parse_args()
     # If it's verify only, don't run
     if args.verifyonly:
-        recipe_verify = True
-        recipe_run = False
+        recipeverify = True
+        reciperun = False
     # If it's run only, don't verify
     elif args.runonly:
-        recipe_verify = False
-        recipe_run = True
+        recipeverify = False
+        reciperun = True
     # If it's neither verify only or run only, do both
     else:
-        recipe_verify = True
-        recipe_run = True
+        recipeverify = True
+        reciperun = True
     # See if there's a recipe list specified
     if args.recipelist:
-        recipe_list = args.recipelist
+        recipelist = args.recipelist
     else:
-        recipe_list = recipe_list
-    return recipe_verify, recipe_run, recipe_list
+        recipelist = recipe_list
+    return recipeverify, reciperun, recipelist
 
 def get_recipe_list(recipe_list):
     # Double-check the recipe list file exists
@@ -99,10 +99,10 @@ def run_recipes(recipes):
 
 def main():
     # Get arguments
-    recipe_verify, recipe_run, recipe_list = get_options(recipe_list)
+    recipeverify, reciperun, recipelist = get_options(recipe_list)
 
     # Get recipe list
-    get_recipe_list(recipe_list)
+    get_recipe_list(recipelist)
 
     if recipeverify:
         # Get verified recipes
