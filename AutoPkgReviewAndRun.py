@@ -2,6 +2,7 @@
 
 ### This script updates AutoPkg repos, verifies trust info (with prompt to update after review), and runs recipes in a recipe list
 
+import argparse
 import os
 import subprocess
 import sys
@@ -12,6 +13,31 @@ recipe_list=os.path.expanduser('~/Library/AutoPkg/recipe_list.txt')
 
 # Acceptable affirmative responses
 affirmative_responses=["y", "yes", "sure", "definitely"]
+
+def get_options(recipe_list):
+    parser = argparse.ArgumentParser(description="Verifies and runs recipes in ~/Library/AutoPkg/recipe_list.txt")
+    parser.add_argument('--verifyonly', help="Only verify the recipes. Don't run AutoPkg.")
+    parser.add_argument('--runonly', help="Only run the recipe list. Do not verify trust info.", action='store_true')
+    parser.add_argument('--recipelist', help="Path to recipe list file. If not specified, the default location of ~/Library/AutoPkg/recipe_list.txt will be used instead")
+    args = parser.parse_args()
+    # If it's verify only, don't run
+    if args.verifyonly:
+        recipe_verify = True
+        recipe_run = False
+    # If it's run only, don't verify
+    elif args.runonly:
+        recipe_verify = False
+        recipe_run = True
+    # If it's neither verify only or run only, do both
+    else
+        recipe_verify = True
+        recipe_run = True
+    # See if there's a recipe list specified
+    if args.recipelist:
+        recipe_list = args.recipelist
+    else:
+        recipe_list = recipe_list
+    return recipe_verify, recipe_run, recipe_list
 
 def get_recipe_list(recipe_list):
     # Double-check the recipe list file exists
@@ -72,12 +98,17 @@ def run_recipes(recipes):
             sys.exit(1)
 
 def main():
-        # Get recipe list
-        get_recipe_list(recipe_list)
+    # Get arguments
+    recipe_verify, recipe_run, recipe_list = get_options(recipe_list)
 
+    # Get recipe list
+    get_recipe_list(recipe_list)
+
+    if recipeverify:
         # Get verified recipes
         recipes = verify_recipes(recipes, affirmative_responses)
 
+    if reciperun:
         # Run the recipes
         run_recipes(recipes)
 
