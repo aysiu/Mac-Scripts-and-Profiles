@@ -41,7 +41,7 @@ def get_options(recipe_list):
 
 def get_recipe_list(recipe_list):
     # Double-check the recipe list file exists
-    if os.path.exists(recipe_list):
+    if os.path.isfile(recipe_list):
         # Put the recipes into a list
         try:
             recipes = [recipe.rstrip('\n') for recipe in open(recipe_list)]
