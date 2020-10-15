@@ -9,10 +9,10 @@ import sys
 
 # Where is the recipe list (one recipe per line) located?
 # Recipe list should be one recipe per line, separated by a carriage return ("\n")
-recipe_list=os.path.expanduser('~/Library/AutoPkg/recipe_list.txt')
+recipe_list = os.path.expanduser('~/Library/AutoPkg/recipe_list.txt')
 
 # Acceptable affirmative responses
-affirmative_responses=["y", "yes", "sure", "definitely"]
+affirmative_responses = ["y", "yes", "sure", "definitely"]
 
 def get_options(recipe_list):
     parser = argparse.ArgumentParser(description="Verifies and runs recipes in ~/Library/AutoPkg/recipe_list.txt")
