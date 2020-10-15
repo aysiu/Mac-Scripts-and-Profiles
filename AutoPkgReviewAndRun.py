@@ -102,7 +102,7 @@ def main():
     recipeverify, reciperun, recipelist = get_options(recipe_list)
 
     # Get recipe list
-    get_recipe_list(recipelist)
+    recipes = get_recipe_list(recipelist)
 
     if recipeverify:
         # Get verified recipes
