@@ -15,10 +15,14 @@ recipe_list = os.path.expanduser('~/Library/AutoPkg/recipe_list.txt')
 affirmative_responses = ["y", "yes", "sure", "definitely"]
 
 def get_options(recipe_list):
-    parser = argparse.ArgumentParser(description="Verifies and runs recipes in ~/Library/AutoPkg/recipe_list.txt")
-    parser.add_argument('--verifyonly', help="Only verify the recipes. Don't run AutoPkg.", action="store_true")
-    parser.add_argument('--runonly', help="Only run the recipe list. Do not verify trust info.", action="store_true")
-    parser.add_argument('--recipelist', help="Path to recipe list file. If not specified, the default location of ~/Library/AutoPkg/recipe_list.txt will be used instead")
+    parser = argparse.ArgumentParser(description="Verifies and runs recipes in \
+        ~/Library/AutoPkg/recipe_list.txt")
+    parser.add_argument('--verifyonly', help="Only verify the recipes. Don't run AutoPkg.",
+        action="store_true")
+    parser.add_argument('--runonly', help="Only run the recipe list. Do not verify trust \
+        info.", action="store_true")
+    parser.add_argument('--recipelist', help="Path to recipe list file. If not specified, \
+        the default location of ~/Library/AutoPkg/recipe_list.txt will be used instead")
     args = parser.parse_args()
     # If it's verify only, don't run
     if args.verifyonly:
@@ -62,7 +66,8 @@ def verify_recipes(recipes, affirmative_responses):
         print("Verifying trust info for {}".format(recipe))
         # See what the verified trust info looks like
         cmd = [ "/usr/local/bin/autopkg", "verify-trust-info", "-vv", recipe ]
-        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding='utf8')
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            encoding='utf8')
         out, err = p.communicate()
         if err:
             verify_result = "Verification failure"
@@ -75,13 +80,15 @@ def verify_recipes(recipes, affirmative_responses):
             if confirmation.lower().strip() in affirmative_responses:
                 print("Updating trust info for {}".format(recipe))
                 cmd = [ "/usr/local/bin/autopkg", "update-trust-info", recipe ]
-                p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding='utf8')
+                p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                    encoding='utf8')
                 out, err = p.communicate()
                 if err:
                     print("Unable to update trust info: {}".format(err))
             else:
                 print("Okay. Not updating trust for {}".format(recipe))
-                # Remove it from the list of recipes to run... no point in running it if the trust info isn't good
+                # Remove it from the list of recipes to run... no point in running it if
+                # the trust info isn't good
                 recipes.remove(recipe)
         else:
             print(verify_result)
