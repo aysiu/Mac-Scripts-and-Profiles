@@ -1,6 +1,7 @@
 #!/Library/AutoPkg/Python3/Python.framework/Versions/Current/bin/python3 
 
-### This script updates AutoPkg repos, verifies trust info (with prompt to update after review), and runs recipes in a recipe list
+### This script updates AutoPkg repos, verifies trust info (with prompt to update after 
+### review), and runs recipes in a recipe list
 
 import argparse
 import os
