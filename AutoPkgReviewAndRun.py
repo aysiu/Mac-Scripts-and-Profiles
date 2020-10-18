@@ -25,8 +25,12 @@ def get_options(recipe_list):
     parser.add_argument('-l', '--recipe-list', help="Path to recipe list file. If not specified, \
         the default location of ~/Library/AutoPkg/recipe_list.txt will be used instead")
     args = parser.parse_args()
+    # If it's verify only and run only, give an error message
+    if args.verifyonly and args.runonly:
+        print("The verify only and run only options are mutually exclusive.")
+        sys.exit(1)
     # If it's verify only, don't run
-    if args.verifyonly:
+    elif args.verifyonly:
         recipeverify = True
         reciperun = False
     # If it's run only, don't verify
