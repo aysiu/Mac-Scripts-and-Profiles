@@ -22,7 +22,7 @@ def get_options(recipe_list):
         action="store_true")
     parser.add_argument('--runonly', help="Only run the recipe list. Do not verify trust \
         info.", action="store_true")
-    parser.add_argument('-l', '--recipe-list', help="Path to recipe list file. If not specified, \
+    parser.add_argument('--recipe-list', '-l', help="Path to recipe list file. If not specified, \
         the default location of ~/Library/AutoPkg/recipe_list.txt will be used instead")
     args = parser.parse_args()
     # If it's verify only and run only, give an error message
@@ -44,8 +44,6 @@ def get_options(recipe_list):
     # See if there's a recipe list specified
     if args.recipe_list:
         recipelist = args.recipe_list
-    elif args.l:
-        recipelist = args.l
     else:
         recipelist = recipe_list
     return recipeverify, reciperun, recipelist
@@ -113,13 +111,7 @@ def run_recipes(recipes):
 
 def main():
     # Get arguments
-    try:
-        recipeverify, reciperun, recipelist = get_options(recipe_list)
-    except:
-        print("No arguments. Running with defaults...")
-        recipelist = recipe_list
-        recipeverify = True
-        reciperun = True
+    recipeverify, reciperun, recipelist = get_options(recipe_list)
 
     # Get recipe list
     recipes = get_recipe_list(recipelist)
