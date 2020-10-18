@@ -18,7 +18,7 @@ affirmative_responses = ["y", "yes", "sure", "definitely"]
 def get_options(recipe_list):
     parser = argparse.ArgumentParser(description="Verifies and runs recipes in \
         ~/Library/AutoPkg/recipe_list.txt")
-    parser.add_argument('--verifyonly', help="Only verify the recipes. Don't run AutoPkg.",
+    parser.add_argument('--verifyonly', help="Only verify the recipes. Do not run AutoPkg.",
         action="store_true")
     parser.add_argument('--runonly', help="Only run the recipe list. Do not verify trust \
         info.", action="store_true")
