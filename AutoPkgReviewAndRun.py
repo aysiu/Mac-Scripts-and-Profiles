@@ -113,7 +113,13 @@ def run_recipes(recipes):
 
 def main():
     # Get arguments
-    recipeverify, reciperun, recipelist = get_options(recipe_list)
+    try:
+        recipeverify, reciperun, recipelist = get_options(recipe_list)
+    except:
+        print("No arguments. Running with defaults...")
+        recipelist = recipe_list
+        recipeverify = True
+        reciperun = True
 
     # Get recipe list
     recipes = get_recipe_list(recipelist)
