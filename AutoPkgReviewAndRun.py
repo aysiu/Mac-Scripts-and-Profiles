@@ -10,14 +10,16 @@ import sys
 
 # Where is the recipe list (one recipe per line) located?
 # Recipe list should be one recipe per line, separated by a carriage return ("\n")
-recipe_list = os.path.expanduser('~/Library/AutoPkg/recipe_list.txt')
+recipe_locations = [ os.path.expanduser('~/Library/AutoPkg/recipe_list.txt'),
+    os.path.expanduser('~/Library/Application Support/AutoPkgr/recipe_list.txt') ]
 
 # Acceptable affirmative responses
 affirmative_responses = ["y", "yes", "sure", "definitely"]
 
-def get_options(recipe_list):
-    parser = argparse.ArgumentParser(description="Verifies and runs recipes in \
-        ~/Library/AutoPkg/recipe_list.txt")
+def get_options():
+    parser = argparse.ArgumentParser(description="Verifies and runs recipes in a recipe \
+        list. Either a specified recipe list or one in ~/Library/AutoPkg/recipe_list.txt \
+        or in ~/Library/Application Support/AutoPkgr/recipe_list.txt")
     parser.add_argument('--verifyonly', help="Only verify the recipes. Do not run AutoPkg.",
         action="store_true")
     parser.add_argument('--runonly', help="Only run the recipe list. Do not verify trust \
@@ -45,12 +47,23 @@ def get_options(recipe_list):
     if args.recipe_list:
         recipelist = args.recipe_list
     else:
-        recipelist = recipe_list
+        recipelist = False
     return recipeverify, reciperun, recipelist
 
-def get_recipe_list(recipe_list):
+def get_recipe_list(recipelist, recipe_locations):
     # Double-check the recipe list file exists
-    if os.path.isfile(recipe_list):
+    recipe_list = False
+    if os.path.isfile(recipelist):
+        print("Using specified {} file".format(recipelist))
+        recipe_list = recipelist
+    else:
+        print("No recipe list specified. Trying default locations...")
+        for recipe_location in recipe_locations:
+            if os.path.isfile(recipe_location):
+                print("Using {}".format(recipe_location))
+                recipe_list = recipe_location
+                break
+    if recipe_list:
         # Put the recipes into a list
         try:
             recipes = [recipe.rstrip('\n') for recipe in open(recipe_list)]
@@ -59,7 +72,7 @@ def get_recipe_list(recipe_list):
             sys.exit(1)
         return recipes
     else:
-        print("{} does not exist. Aborting run.".format(recipe_list))
+        print("Could not find a valid recipe list")
         sys.exit(1)
 
 def verify_recipes(recipes, affirmative_responses):
@@ -111,10 +124,10 @@ def run_recipes(recipes):
 
 def main():
     # Get arguments
-    recipeverify, reciperun, recipelist = get_options(recipe_list)
+    recipeverify, reciperun, recipelist = get_options()
 
     # Get recipe list
-    recipes = get_recipe_list(recipelist)
+    recipes = get_recipe_list(recipelist, recipe_locations)
 
     if recipeverify:
         # Get verified recipes
