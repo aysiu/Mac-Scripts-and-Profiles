@@ -20,7 +20,7 @@ def get_options():
     parser = argparse.ArgumentParser(description="Verifies and runs recipes in a recipe \
         list. Either a specified recipe list or one in ~/Library/AutoPkg/recipe_list.txt \
         or in ~/Library/Application Support/AutoPkgr/recipe_list.txt")
-    parser.add_argument('--verifyonly', help="Only verify the recipes. Do not run AutoPkg.",
+    parser.add_argument('--verifyonly', '--reviewonly', help="Only verify the recipes. Do not run AutoPkg.",
         action="store_true")
     parser.add_argument('--runonly', help="Only run the recipe list. Do not verify trust \
         info.", action="store_true")
